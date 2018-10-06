@@ -97,6 +97,16 @@ app.post('/', (req, res) => {
     if (verified) {
         // After we have verified the data we can use their BloomId to request information from their smart contract in order to creat a loan origination to their public address that is stored using the Attestation Repo.
 
+        // tl;dr use BloomId to query smart contract for ethereum public addresses.
+        // Use attestation to verify identification.
+        /* Use accountIdForAddress function
+        As an example what we can do this using web3:
+        accountRegistry = AccountRegistry.at("[address of registry contract]")
+        userId = accountRegistry.accountIdForAddress.call(address)
+        userId == bloomID
+        and if it is verified we can then create the loan.
+        */
+
         res.status(200).json({
             sucess: true,
             token: req.body.token
