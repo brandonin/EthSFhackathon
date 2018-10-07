@@ -25,13 +25,16 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(cors());
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    next();
+})
 
 io.on('connection', socket => {
     console.log("it connected");
 })
 
 app.post('/', (req, res) => {
-    console.log("lol")
     io.emit('foo', 'bar');
     // Object.keys(req.body).map((key, value) => {
     //     console.log('key', key)
