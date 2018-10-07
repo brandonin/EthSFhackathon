@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@bloomprotocol/share-kit": "^1.1.1",
+    "@wyre/api": "^1.0.3",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
