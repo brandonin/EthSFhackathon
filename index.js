@@ -17,15 +17,27 @@ const PORT = 8000;
 
 const app = express();
 const server = http.createServer(app);
+const io = require('socket.io')(server);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: true
+    extended: false
 }));
 
 app.use(cors());
 
+io.on('connection', socket => {
+    console.log("it connected");
+})
+
 app.post('/', (req, res) => {
+    console.log("lol")
+    io.emit('foo', 'bar');
+    // Object.keys(req.body).map((key, value) => {
+    //     console.log('key', key)
+    //     console.log('value', value)
+    // })
+    // console.log(req.body)
     req.body = {
         "bloom_id": 299,
         "token": "a08714b92346a1bba4262ed575d23de3ff3e6b5480ad0e1c82c011bab0411fdf",
@@ -84,6 +96,46 @@ app.post('/', (req, res) => {
                         "data": "0xdb7d23746b0e8cbb81762bdce521cee4abdd4232bd63f017d136f24a751d0a5b"
                     }
                 ]
+            },
+            {
+                "tx": "0xe1f7b9603bd8d71927b9aabf88be14342964b4f4abc673a5e0f8dcbbd7c610e8",
+                "stage": "mainnet",
+                "rootHash": "0xc13405b3de1d86d0e23ee749779dc4dc90166d1f74a4e76cf1cf84f3de15902f",
+                "target": {
+                    "type": "account-number",
+                    "data": "111111111111111",
+                    "nonce": "c3877038-79a9-477d-8037-9826032e6af5",
+                    "version": "1.0.0"
+                },
+                "proof": [{
+                        "position": "left",
+                        "data": "0x07b51789d6bbe5cb084c502b03168adafbbb58ad5fff2af9f612b2b9cf54c31f"
+                    },
+                    {
+                        "position": "right",
+                        "data": "0xdb7d23746b0e8cbb81762bdce521cee4abdd4232bd63f017d136f24a751d0a5b"
+                    }
+                ]
+            },
+            {
+                "tx": "0xe1f7b9603bd8d71927b9aabf88be14342964b4f4abc673a5e0f8dcbbd7c610e8",
+                "stage": "mainnet",
+                "rootHash": "0xc13405b3de1d86d0e23ee749779dc4dc90166d1f74a4e76cf1cf84f3de15902f",
+                "target": {
+                    "type": "routing-number",
+                    "data": "111111111",
+                    "nonce": "c3877038-79a9-477d-8037-9826032e6af5",
+                    "version": "1.0.0"
+                },
+                "proof": [{
+                        "position": "left",
+                        "data": "0x07b51789d6bbe5cb084c502b03168adafbbb58ad5fff2af9f612b2b9cf54c31f"
+                    },
+                    {
+                        "position": "right",
+                        "data": "0xdb7d23746b0e8cbb81762bdce521cee4abdd4232bd63f017d136f24a751d0a5b"
+                    }
+                ]
             }
         ]
     };
@@ -108,7 +160,7 @@ app.post('/', (req, res) => {
         */
 
         res.status(200).json({
-            sucess: true,
+            success: true,
             token: req.body.token
         });
     } else {
