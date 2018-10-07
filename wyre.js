@@ -1,17 +1,17 @@
 const WyreClient = require('@wyre/api').WyreClient
 // import {WyreClient} from '@wyre/api'
-var session = "PUD3U4GVJBNYCUZPW3P2VFJ2BD7XD7GWEAQ928PZ49CMG373Z6";
+var session = process.env.WYRE_SUBSCRIPTION;
 
 let wyre = new WyreClient({
     format: "json_numberstring",
-    apiKey: 'AK-N4RMHCDG-WEEYJX7E-TPYW8CTG-N4DP8B68',
-    secretKey: 'SK-9V7W9RBC-HX3JJEQE-XV7WRRLG-RCDTABR2',
+    apiKey: process.env.WYRE_API_KEY,
+    secretKey: process.env.WYRE_SECRET_KEY,
     baseUrl: "https://api.testwyre.com/"
 })
 
 // create wallet
 // wyre.post("/wallets", {
-//     name: "user3"
+//     name: "user6"
 // })
 // .then(data => console.log(data))
 // .catch(err => console.log(err));
@@ -40,7 +40,7 @@ function transferDai(ethAddress) {
         },
         destCurrency: "USD",
         sourceCurrency: "DAI",
-        destAmount: "10",
+        destAmount: "5",
         autoConfirm: true
     })
 }
